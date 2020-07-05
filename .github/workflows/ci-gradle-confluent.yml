@@ -24,4 +24,4 @@ jobs:
     - name:  Log into AWS ECR
       run: $(aws ecr get-login --registry-ids ${REGID} --no-include-email)
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${REPO_NAME}:${REPO_VERSION}
+      run: docker build  -u gradle -v "$PWD":/home/gradle/project -w /home/gradle/project . --file Dockerfile --tag ${REPO_NAME}:${REPO_VERSION}
