@@ -1,0 +1,27 @@
+name: gradle confluent docker builder
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REGID:  "967725203692"
+      REPO_NAME: "gradle-confluent"
+      REPO:  "$REGID.dkr.ecr.us-east-2.amazonaws.com/$REPO_NAME"
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: "us-east-2"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set REPO_VERSION variable
+      run: |
+        echo ::set-env name=REPO_VERSION::$(date +"%Y-%m-%d_%H-%M-%S")_$(git log -1 --pretty=format:%h)
+    - name:  Log into AWS ECR
+      run: $(aws ecr get-login --registry-ids ${REGID} --no-include-email)
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${REPO_NAME}:${REPO_VERSION}
