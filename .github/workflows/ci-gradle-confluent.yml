@@ -12,7 +12,7 @@ jobs:
     env:
       REGID:  "967725203692"
       REPO_NAME: "gradle-confluent"
-      REPO:  "${{ REGID }}.dkr.ecr.us-east-2.amazonaws.com/${{ REPO_NAME }}"
+      REPO:  "$REGID.dkr.ecr.us-east-2.amazonaws.com/$REPO_NAME"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: "us-east-2"
