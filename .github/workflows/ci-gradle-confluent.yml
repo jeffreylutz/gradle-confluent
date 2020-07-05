@@ -18,5 +18,8 @@ jobs:
       AWS_DEFAULT_REGION: "us-east-2"
     steps:
     - uses: actions/checkout@v2
-    - run: |
+    - name: Set REPO_VERSION variable
+      run: |
         echo ::set-env name=REPO_VERSION::$(date +"%Y-%m-%d_%H-%M-%S")_$(git log -1 --pretty=format:%h)
+    - name:  Log into AWS ECR
+      run: $(aws ecr get-login --registry-ids ${REGID} --no-include-email)
