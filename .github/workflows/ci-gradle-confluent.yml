@@ -20,11 +20,3 @@ jobs:
     - uses: actions/checkout@v2
     - run: |
         echo ::set-env name=REPO_VERSION::$(date +"%Y-%m-%d_%H-%M-%S")_$(git log -1 --pretty=format:%h)
-    - name:  Log into AWS ECR
-      run: $(aws ecr get-login --registry-ids ${REGID} --no-include-email)
-    - name: Build the Docker image locally
-      run: docker build . --file Dockerfile --tag ${REPO_NAME}:${REPO_VERSION}
-    - name: Tag and publish the Docker image already built
-      run: docker tag ${REPO_NAME}:${REPO_VERSION} ${REPO}:${REPO_VERSION}
-    - name: Tag and publish the Docker image already built
-      run: docker push ${REPO}:${REPO_VERSION}
