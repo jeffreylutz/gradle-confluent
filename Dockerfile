@@ -36,7 +36,7 @@ RUN ls -laF /build/build
 
 # Copy the files into docker image
 RUN mkdir /gradlelibs
-#COPY /build/build/libs/gradle-confluent*.jar /gradlelibs/
+COPY /build/build/libs/gradle-confluent*.jar /gradlelibs/
 
 #RUN rm -rf /build
 
