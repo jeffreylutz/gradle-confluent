@@ -30,7 +30,7 @@ RUN rm -rf /build/wrapper
 
 RUN gradle wrapper
 RUN ./gradlew -S --no-daemon -Panalytics.buildTag=1.1.24 clean build release -Prelease.disableChecks -Prelease.localOnly || echo ' '
-RUN ls -laF /build/build
+RUN ls -laF /build/build/libs
 
 # ./gradlew -S --no-daemon -Panalytics.buildTag=1.1.23 clean build release -Prelease.disableChecks -Prelease.localOnly
 
