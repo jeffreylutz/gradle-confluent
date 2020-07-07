@@ -25,3 +25,7 @@ jobs:
       run: $(aws ecr get-login --registry-ids ${REGID} --no-include-email)
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${REPO_NAME}:${REPO_VERSION}
+    - name: Tag and publish the Docker image already built
+      run: docker tag ${REPO_NAME}:${REPO_VERSION} ${REPO}:${REPO_VERSION}
+    - name: Tag and publish the Docker image already built
+      run: docker push ${REPO}:${REPO_VERSION}
