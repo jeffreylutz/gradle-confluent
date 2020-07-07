@@ -26,6 +26,8 @@ WORKDIR /build
 
 COPY * /build/
 
+RUN ls -laF /build
+
 RUN rm -rf /build/wrapper
 
 RUN gradle wrapper
