@@ -35,7 +35,7 @@ RUN ./gradlew -S -Panalytics.buildTag=1.1.23 clean build release -Prelease.disab
 
 # Copy the files into docker image
 RUN mkdir /gradlelibs
-COPY build/libs/gradle-confluent*.jar /gradlelibs/
+COPY /build/libs/gradle-confluent*.jar /gradlelibs/
 
 RUN rm -rf /build
 
