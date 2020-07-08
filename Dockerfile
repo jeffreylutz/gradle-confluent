@@ -21,23 +21,23 @@ VOLUME work
 # Gradle cache directory
 VOLUME GRADLE_CACHE
 
-RUN mkdir -p /build
-WORKDIR /build
+RUN mkdir -p /tempbuild
+WORKDIR /tempbuild
 
-COPY * /build/
+ADD ./ /tempbuild/
 
-RUN rm -rf /build/wrapper
+RUN rm -rf /tempbuild/wrapper
 
-RUN gradle wrapper
-RUN ./gradlew -S --no-daemon -Panalytics.buildTag=1.1.24 clean build release -Prelease.disableChecks -Prelease.localOnly || echo ' '
-RUN ls -laF /build/build/libs
+#RUN gradle wrapper
+#RUN ./gradlew -S --no-daemon -Panalytics.buildTag=1.1.24 clean build release -Prelease.disableChecks -Prelease.localOnly || echo ' '
+#RUN ls -laF /tempbuild/build/libs
 
 # ./gradlew -S --no-daemon -Panalytics.buildTag=1.1.23 clean build release -Prelease.disableChecks -Prelease.localOnly
 
 # Copy the files into docker image
-RUN mkdir /gradlelibs
-RUN cp /build/build/libs/gradle-confluent*.jar /gradlelibs/
+#RUN mkdir /gradlelibs
+#RUN cp /build/build/libs/gradle-confluent*.jar /gradlelibs/
 
-#RUN rm -rf /build
+#RUN rm -rf /tempbuild
 
 #ENTRYPOINT ["gradle", "-g", "/GRADLE_CACHE", "--no-daemon"]
